@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "baseHref": "/vireo-demo/",
+                        "baseHref": "/vireo-demo/dist/",
                         "outputPath": "dist",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -53,10 +53,10 @@
                             "namedChunks": true
                         },
                         "github-pages": {
-                            "baseHref": "/vireo-demo/"
+                            "baseHref": "/vireo-demo/dist/"
                         }
                     },
-                    "defaultConfiguration": "production"
+                    "defaultConfiguration": "github-pages"
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
