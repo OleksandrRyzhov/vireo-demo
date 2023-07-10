@@ -51,6 +51,9 @@
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
+                        },
+                        "github-pages": {
+                            "baseHref": "/vireo-demo/"
                         }
                     },
                     "defaultConfiguration": "production"
