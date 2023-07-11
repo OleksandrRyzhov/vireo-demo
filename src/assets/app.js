@@ -449,15 +449,20 @@ function formInit() {
                     }
                 }
             });
-
+            function cSelectCurrentCheck() {
+                if (cSelectCurrent.textContent === "+1") {
+                    cSelectCurrent.classList.add("usa");
+                } else {
+                    cSelectCurrent.classList.remove("usa");
+                }
+            }
+            cSelectList.addEventListener("click", cSelectCurrentCheck);
+            cSelectCurrentCheck();
             if (cSelectList.children.length > 0) {
                 for (let i = 0; i < cSelectList.children.length; i++) {
                     if (cSelectList.children[i].textContent === "+1") {
                         cSelectList.children[i].classList.add("usa");
                     }
-                }
-                if (cSelectCurrent.textContent === "+1") {
-                    cSelectCurrent.classList.add("usa");
                 }
             }
 
