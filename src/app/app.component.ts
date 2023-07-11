@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 declare function menuInit(): void;
+declare function formInit(): void;
 
 @Component({
     selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent {
         this.router.events.subscribe((e) => {
             if (e instanceof NavigationEnd) {
                 menuInit();
+                formInit();
             }
         });
     }

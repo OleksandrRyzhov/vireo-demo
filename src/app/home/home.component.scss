@@ -103,10 +103,14 @@
         max-height: 100%;
         margin-right: 3.666667%;
         min-width: 468px;
+        max-width: 544px;
         @media (max-width: 1280px) {
             min-width: auto;
-            margin-right: 0;
+            @include adaptive-value(margin-right, 44, -467, 1);
             width: 49.576271%;
+        }
+        @media (max-width: 1170px) {
+            margin-right: 0;
         }
         @media (max-width: 860px) {
             width: 48.5%;
@@ -213,7 +217,10 @@
     position: relative;
     padding: 120px 0 70px;
     @media (max-width: 1024px) {
-        padding: 64px 0;
+        padding: 64px 0 80px;
+    }
+    @media (max-width: 767px) {
+        padding: 48px 0 40px;
     }
     &::after {
         content: "";
@@ -228,21 +235,22 @@
     &__container {
         display: grid;
         grid-template-columns: 49.25% 45.333333%;
+        grid-template-rows: 1fr auto;
         justify-content: space-between;
-        gap: 3.177966%; /* 30/944 */
+        column-gap: 3.177966%;
         @media (max-width: 1280px) {
-            grid-template-columns: 46.927966% 49.576271%; /* 468/944 */
+            grid-template-columns: 46.927966% 49.576271%;
         }
-
-        @media (max-width: 860px) {
-            grid-template-columns: 46.927966%48.5%; /* 443/944 */
-        }
-        @media (max-width: 767px) {
+        @media (max-width: 1179px) {
             display: block;
         }
     }
     &__top {
-        float: left;
+        @media (max-width: 1179px) {
+            margin: 0 auto;
+            max-width: 443px;
+            text-align: center;
+        }
     }
     // .contact__title
     &__title {
@@ -251,7 +259,6 @@
         @media (max-width: 1024px) {
             margin-bottom: 16px;
         }
-        // float: left;
     }
     // .contact__text
     &__text {
@@ -272,13 +279,13 @@
         width: 100%;
         max-height: 100%;
         margin-top: 60px;
-        @media (max-width: 1024px) {
-            margin-top: 70px;
-        }
-        @media (max-width: 767px) {
+        max-width: 544px;
+        margin-left: auto;
+        grid-row: span 2;
+        @media (max-width: 1179px) {
             max-width: 400px;
             margin: 0 auto 32px;
-            display: flex;
+            display: block;
         }
     }
 }
