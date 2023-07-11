@@ -458,9 +458,14 @@ function formInit() {
             }
             cSelectList.addEventListener("click", cSelectCurrentCheck);
             cSelectCurrentCheck();
+            console.log(cSelectList.parentNode.parentNode);
+            let parentSelectList = cSelectList.parentNode.parentNode;
             if (cSelectList.children.length > 0) {
                 for (let i = 0; i < cSelectList.children.length; i++) {
-                    if (cSelectList.children[i].textContent === "+1") {
+                    if (
+                        cSelectList.children[i].textContent === "+1" &&
+                        parentSelectList.classList.contains("form__phone-body")
+                    ) {
                         cSelectList.children[i].classList.add("usa");
                     }
                 }

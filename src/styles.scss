@@ -765,6 +765,13 @@ html {
         transition: background-color 0.3s ease 0s;
         font-size: 16px;
         line-height: 20px;
+        &::after {
+            content: url("./assets/img/landing/chosen-icon.svg");
+            height: 20px;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 0.15s ease 0s, transform 0.15s ease 0s;
+        }
         &.usa {
             &::before {
                 height: 24px;
@@ -773,8 +780,8 @@ html {
         }
         &.active {
             &::after {
-                content: url("./assets/img/landing/chosen-icon.svg");
-                height: 20px;
+                opacity: 1;
+                transform: scale(1);
             }
         }
         @media (any-hover: hover) {
