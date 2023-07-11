@@ -708,7 +708,7 @@ html {
             font-size: 16px;
             line-height: 20px;
             &::after {
-                content: url("/assets/img/landing/arrow-appeal.svg");
+                content: url("./assets/img/landing/arrow-appeal.svg");
             }
         }
         .phone & {
@@ -721,11 +721,11 @@ html {
             &.usa {
                 &::before {
                     height: 24px;
-                    content: url("/assets/img/landing/flag/usa.svg");
+                    content: url("./assets/img/landing/flag/usa.svg");
                 }
             }
             &::after {
-                content: url("/assets/img/landing/arrow-phone.svg");
+                content: url("./assets/img/landing/arrow-phone.svg");
             }
         }
         @media (any-hover: hover) {
@@ -768,12 +768,12 @@ html {
         &.usa {
             &::before {
                 height: 24px;
-                content: url("/assets/img/landing/flag/usa.svg");
+                content: url("./assets/img/landing/flag/usa.svg");
             }
         }
         &.active {
             &::after {
-                content: url("/assets/img/landing/chosen-icon.svg");
+                content: url("./assets/img/landing/chosen-icon.svg");
                 height: 20px;
             }
         }
