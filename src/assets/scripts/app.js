@@ -111,7 +111,7 @@ function formInit() {
 
     if (forms.length === 0) return;
 
-    let formBtn = document.querySelectorAll(".form__btn");
+    let formBtns = document.querySelectorAll(".form__btn");
 
     /*
     const allCountries = [
@@ -1116,5 +1116,121 @@ function formInit() {
                 }
             }
         }
+    }
+    // form fields
+    const nameInput = document.querySelector("#customerName");
+    const emailInput = document.querySelector("#customerEmail");
+    const phoneInput = document.querySelector("#phone");
+
+    // form fields validate
+    function formAddError(input) {
+        input.parentElement.classList.add("error");
+        input.classList.add("error");
+    }
+    function formRemoveError(input) {
+        input.parentElement.classList.remove("error");
+        input.classList.remove("error");
+    }
+    function emailTest(input) {
+        return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(
+            input.value
+        );
+    }
+    if (nameInput) {
+        nameInput.addEventListener("input", function () {
+            if (nameInput.value.match(/[\d=+?/\\|*!$#@%^&()_~",<>\[\]{};:]/g)) {
+                nameInput.value = nameInput.value.replace(
+                    /[\d=+?/\\|*!$#@%^&()_~",<>\[\]{};:]/g,
+                    ""
+                );
+            }
+            if (nameInput.value.match(/^[\s]/g)) {
+                nameInput.value = nameInput.value.replace(/^[\s]/g, "");
+            }
+        });
+        nameInput.addEventListener("blur", () => {
+            if (nameInput.value.length > 0) {
+                if (nameInput.value.replace(/[\s]/g, "").length < 2) {
+                    formAddError(nameInput);
+                } else if (nameInput.value.replace(/[\s]/g, "").length >= 2) {
+                    formRemoveError(nameInput);
+                }
+                nameInput.value = nameInput.value.replace(/\s{2,1000}/g, " ");
+            }
+        });
+    }
+    if (emailInput) {
+        emailInput.addEventListener("blur", () => {
+            if (emailInput.value.length > 0) {
+                if (emailTest(emailInput)) {
+                    formAddError(emailInput);
+                } else if (emailInput.value.length >= 6) {
+                    formRemoveError(emailInput);
+                }
+            }
+        });
+    }
+    for (let i = 0; i < forms.length; i++) {
+        formBtns[i].addEventListener("click", function (e) {
+            e.preventDefault();
+            let error = formValidate(forms[i]);
+
+            if (error === 0) {
+                formSend(forms[i]);
+            }
+        });
+    }
+    function formValidate(form) {
+        const inputs = form.querySelectorAll("input");
+        let error = 0;
+        inputs.forEach((input) => {
+            if (input.value.length < 1) {
+                formAddError(input);
+                error++;
+            } else if (input.classList.contains("error")) {
+                formAddError(input);
+                error++;
+            }
+        });
+
+        return error;
+        //==============================================================================================================================================
+    }
+    function serialize(form) {
+        let items = form.querySelectorAll("select, input, textarea");
+        let SelectedDialCode = form.querySelector(".iti__selected-dial-code");
+        let str = "";
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+            let name = item.name;
+            let value = item.value;
+            let separator = i === 0 ? "" : "&";
+            if (value) {
+                if (name === "Customer_phone") {
+                    value = SelectedDialCode.textContent + " " + value;
+                }
+                str += separator + name + "=" + value;
+            }
+        }
+        return str;
+    }
+    function formSend(form) {
+        let data = serialize(form);
+        //==============================================================================================================================================
+
+        console.log(data);
+
+        //==============================================================================================================================================
+        form.reset();
+        //==============================================================================================================================================
+
+        let btn = form.querySelector(".btn");
+        const startText = btn.textContent;
+        btn.textContent = "Thank You";
+        setTimeout(function () {
+            btn.textContent = startText;
+        }, 2000);
+
+        //==============================================================================================================================================
     }
 }

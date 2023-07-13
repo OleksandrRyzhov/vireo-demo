@@ -638,6 +638,9 @@ html {
                 border-color: #f2f2f4;
             }
         }
+        &.error {
+            border-color: red;
+        }
     }
     .name {
         input {
