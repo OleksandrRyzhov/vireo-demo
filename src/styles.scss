@@ -176,14 +176,6 @@ html {
         font-size: 28px;
     }
 }
-.points {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    word-wrap: break-word;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
 // =========================================================================================
 .icon-menu {
     display: block;
@@ -558,6 +550,7 @@ html {
         display: flex;
         flex-direction: column;
         gap: 8px;
+        position: relative;
     }
     &__item-name {
         font-size: 14px;
@@ -656,11 +649,6 @@ html {
             pointer-events: none;
         }
     }
-    .phone {
-        input {
-            border-radius: 0px 8px 8px 0px;
-        }
-    }
     textarea {
         min-height: 88px;
         max-height: 12rem;
@@ -680,15 +668,84 @@ html {
         }
     }
 }
+.iti {
+    &.iti--allow-dropdown {
+        width: 100%;
+    }
+    &__country-list {
+        left: 0;
+        margin: 8px 0;
+        padding: 4px;
+        box-shadow: 0px 24px 16px -12px rgba(101, 93, 122, 0.04),
+            0px 12px 32px 0px rgba(101, 93, 122, 0.04);
+        border: none;
+        border-radius: 8px;
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-track {
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #f3f2f5;
+            border-radius: 4px;
+        }
+    }
+    &__country {
+        border-radius: 4px;
+        transition: background-color 0.3s ease 0s;
+        font-size: 16px;
+        line-height: 20px;
+        position: relative;
+        padding: 8px;
+        padding-right: 30px;
+        .iti-mobile & {
+            padding: 8px;
+            padding-right: 30px;
+        }
+        &::after {
+            position: absolute;
+            content: url("./assets/img/landing/chosen-icon.svg");
+            height: 20px;
+            width: 20px;
+            right: 8px;
+            opacity: 0;
+            top: 50%;
+            transform: scale(0) translate(0, -50%);
+            transition: opacity 0.15s ease 0s, transform 0.15s ease 0s;
+        }
+        &.iti__active {
+            &::after {
+                opacity: 1;
+                transform: scale(1) translate(0, -50%);
+            }
+        }
+    }
+    &__arrow {
+        border: none;
+        content: url("./assets/img/landing/arrow-phone.svg");
+        height: 14px;
+        width: 14px;
+        transition: transform 0.3s ease 0s;
+        &--up {
+            transform: rotate(180deg);
+        }
+    }
+    &__selected-flag {
+        color: #0064d3;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 150%;
+    }
+}
 .custom-select {
-    position: relative;
     display: flex;
     color: #3e345c;
-    .phone & {
-        min-width: 115px;
-        width: 33%;
-        color: #0064d3;
-    }
+    // .phone & {
+    //     min-width: max-content;
+    //     width: 33%;
+    //     color: #0064d3;
+    // }
     &__current {
         cursor: pointer;
         display: flex;
@@ -698,36 +755,44 @@ html {
         border: 1px solid rgba(0, 0, 0, 0.2);
         width: 100%;
         transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s;
+        .points {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            word-wrap: break-word;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
         &::after {
             height: 20px;
             transition: transform 0.3s ease 0s;
         }
-        .appeal & {
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            line-height: 20px;
-            &::after {
-                content: url("./assets/img/landing/arrow-appeal.svg");
-            }
+        // .appeal & {
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 20px;
+        &::after {
+            content: url("./assets/img/landing/arrow-appeal.svg");
         }
-        .phone & {
-            padding: 13px 14px;
-            border-radius: 12px 0px 0px 12px;
-            font-family: "Inter", sans-serif;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 150%;
-            &.usa {
-                &::before {
-                    height: 24px;
-                    content: url("./assets/img/landing/flag/usa.svg");
-                }
-            }
-            &::after {
-                content: url("./assets/img/landing/arrow-phone.svg");
-            }
-        }
+        // }
+        // .phone & {
+        //     padding: 13px 14px;
+        //     border-radius: 12px 0px 0px 12px;
+        //     font-family: "Inter", sans-serif;
+        //     font-size: 16px;
+        //     font-weight: 500;
+        //     line-height: 150%;
+        //     &::before {
+        //         height: 14px;
+        //         margin: 0 4px 5px;
+        //         aspect-ratio: 4/3;
+        //         content: var(--img-url);
+        //     }
+        //     &::after {
+        //         content: url("./assets/img/landing/arrow-phone.svg");
+        //     }
+        // }
         @media (any-hover: hover) {
             &:hover {
                 background-color: #f2f2f4;
@@ -738,9 +803,10 @@ html {
     &__list {
         position: absolute;
         top: 100%;
-        width: 100%;
+        width: auto;
         z-index: 2;
         max-height: 224px;
+        width: 100%;
         overflow: hidden;
         overflow-y: auto;
         visibility: hidden;
@@ -752,32 +818,42 @@ html {
         box-shadow: 0px 24px 16px -12px rgba(101, 93, 122, 0.04),
             0px 12px 32px 0px rgba(101, 93, 122, 0.04);
         padding: 4px;
+        border-radius: 8px;
     }
     &__item {
         cursor: pointer;
         padding: 8px;
         border-radius: 4px;
-        transition: all 0.3s ease 0s;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 8px;
         transition: background-color 0.3s ease 0s;
         font-size: 16px;
         line-height: 20px;
+        // .phone & {
+        //     .points {
+        //         margin-left: auto;
+        //     }
+        //     &::before {
+        //         height: 13px;
+        //         height: 14px;
+        //         margin: 0 4px 3px;
+        //         aspect-ratio: 4/3;
+        //         content: var(--img-url);
+        //     }
+        //     &::after {
+        //         margin-left: 0;
+        //     }
+        // }
         &::after {
             content: url("./assets/img/landing/chosen-icon.svg");
             height: 20px;
+            margin-left: auto;
             opacity: 0;
             transform: scale(0);
             transition: opacity 0.15s ease 0s, transform 0.15s ease 0s;
         }
-        &.usa {
-            &::before {
-                height: 24px;
-                content: url("./assets/img/landing/flag/usa.svg");
-            }
-        }
+
         &.active {
             &::after {
                 opacity: 1;

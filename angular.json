@@ -21,12 +21,15 @@
                         "outputPath": "dist",
                         "index": "src/index.html",
                         "main": "src/main.ts",
-                        "polyfills": ["zone.js"],
+                        "polyfills": "zone.js",
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": ["src/favicon.ico", "src/assets"],
-                        "styles": ["src/styles.scss"],
-                        "scripts": ["src/assets/app.js"]
+                        "styles": [
+                            "./node_modules/intl-tel-input/build/css/intlTelInput.css",
+                            "src/styles.scss"
+                        ],
+                        "scripts": ["src/assets/scripts/app.js"]
                     },
                     "configurations": {
                         "production": {
@@ -60,6 +63,9 @@
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "angular-app:build"
+                    },
                     "configurations": {
                         "production": {
                             "browserTarget": "angular-app:build:production"
